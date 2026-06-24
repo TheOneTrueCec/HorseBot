@@ -27,8 +27,8 @@ if __name__ == "__main__":
     config.read("./config.yaml")
 
     intents = discord.Intents.default()
-    intents.message_content = True
-    intents.members = True
+    # intents.message_content = True
+    # intents.members = True
     client = commands.Bot(command_prefix='$', intents=intents)
 
 @client.event
