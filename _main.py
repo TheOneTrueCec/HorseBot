@@ -6,11 +6,8 @@ from discord import app_commands
 from discord.ext import tasks, commands
 import discord.ext.commands
 from dotenv import load_dotenv
-import json
+
 import asyncio
-import datetime
-import time
-import random
 
 # utc = datetime.timezone.utc
 
