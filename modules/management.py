@@ -13,6 +13,7 @@ config.read("./config.yaml")
 
 MODROLE = int(config.get("General", "moderator"))
 HONEYPOT = int(config.get("General", "honeypot"))
+YAMIKS = int(config.get("General", "yamiks"))
 
 class ManagementCog(commands.Cog):
     def __init__(self, bot):
@@ -23,9 +24,11 @@ class ManagementCog(commands.Cog):
         guild: discord.guild.Guild = await self.bot.fetch_guild(SERVER)
         if message.author == self.bot.user:
             return
+        elif message.author == YAMIKS:
+            return
+
         MOD: discord.role.Role = guild.get_role(MODROLE)
         if MOD in message.author.roles:
-            
             return
 
         if message.channel.id == HONEYPOT:
