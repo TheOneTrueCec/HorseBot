@@ -27,9 +27,12 @@ class ManagementCog(commands.Cog):
         elif message.author == YAMIKS:
             return
 
-        MOD: discord.role.Role = guild.get_role(MODROLE)
-        if MOD in message.author.roles:
-            return
+        try:
+            MOD: discord.role.Role = guild.get_role(MODROLE)
+            if MOD in message.author.roles:
+                return
+        except:
+            pass
 
         if message.channel.id == HONEYPOT:
             user: discord.member.Member = await guild.fetch_member(message.author.id)
