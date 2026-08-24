@@ -3,6 +3,7 @@ import configparser
 import discord
 from discord.ext import tasks, commands
 from discord import app_commands
+import datetime
 
 SERVER = os.getenv("SERVER")
 LOGS = os.getenv("LOGS")
@@ -29,8 +30,8 @@ class ManagementCog(commands.Cog):
 
         try:
             MOD: discord.role.Role = guild.get_role(MODROLE)
-            if MOD in message.author.roles:
-                return
+            # if MOD in message.author.roles:
+            #     return
         except:
             pass
 
@@ -38,7 +39,11 @@ class ManagementCog(commands.Cog):
             user: discord.member.Member = await guild.fetch_member(message.author.id)
             # honey_channel = await self.bot.fetch_channel(HONEYPOT) 
             # await honey_channel.send("Bang")
-            await user.ban(delete_message_days=1, reason="Scam Bot")
+            try:
+                await user.ban(delete_message_days=1, reason="Scam Bot")
+            except discord.errors.Forbidden:
+                await user.timeout(datetime.timedelta(minutes=1), reason="Poor Soul Got Hacked")
+                await message.delete()
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(ManagementCog(bot))
