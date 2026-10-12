@@ -68,3 +68,6 @@ async def setup(bot: commands.Bot):
 class Banned(peewee.Model):
     discordid = peewee.IntegerField()
     banDate = peewee.DateField()
+
+    class Meta:
+        database = DATABASE
