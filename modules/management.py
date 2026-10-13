@@ -56,9 +56,10 @@ class ManagementCog(commands.Cog):
 
     @tasks.loop(hours=1)
     async def updateStatus(self):
+        print("doop")
         bancount = len(Banned.select())
-        game = discord.Game(f'with {bancount} banned players')
-        await self.bot.change_presence(status=None, activity=game)
+        print(bancount)
+        await self.bot.change_presence(status=None, activity=discord.Game(f'with {bancount} banned players'))
 
 
 async def setup(bot: commands.Bot):
