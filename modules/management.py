@@ -58,7 +58,7 @@ class ManagementCog(commands.Cog):
     async def updateStatus(self):
         bancount = len(Banned.select())
         game = discord.Game(f'with {bancount} banned players')
-        await self.bot.change_presence(status=discord.Status.online, activity=game)
+        await self.bot.change_presence(status=None, activity=game)
 
 
 async def setup(bot: commands.Bot):
