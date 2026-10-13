@@ -26,7 +26,7 @@ class ManagementCog(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         await self.bot.wait_until_ready()
-        self.updateStatus.start()
+        # self.updateStatus.start()
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.message.Message):
