@@ -26,7 +26,7 @@ class ManagementCog(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         await self.bot.wait_until_ready()
-        # self.updateStatus.start()
+        self.updateStatus.start()
 
     @commands.Cog.listener()
     async def on_message(self, message: discord.message.Message):
@@ -53,6 +53,11 @@ class ManagementCog(commands.Cog):
             except discord.errors.Forbidden:
                 await user.timeout(datetime.timedelta(minutes=1), reason="Poor Soul Got Hacked")
                 await message.delete()
+
+    @app_commands.command(name="scam_count", description="Scam Bot Ban Count") #Pulls based off of thunderinsights
+    async def lookup_player(self, interaction: discord.interactions.Interaction):
+        bancount = len(Banned.select())
+        await interaction.response.send_message(f'```{bancount} bots yeeted```')
 
     @tasks.loop(hours=1)
     async def updateStatus(self):
